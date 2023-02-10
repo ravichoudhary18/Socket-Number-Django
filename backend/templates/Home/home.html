@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main-div{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .main-text{
+            font-size: 64px;
+            color: #c1c1c1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-div">
+        <h1>Random Number Renrate</h1>
+        <h1 class="main-text"></h1>
+    </div>
+
+    <script>
+        h1 = document.querySelector('.main-text')
+        const socket = new WebSocket(
+            'ws://' + window.location.host + '/ws/random_number/'
+        );
+    
+        socket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            h1.innerText = data['number']
+            console.log('Received data:', data);
+        };
+    
+        socket.onopen = function(e) {
+            console.log('WebSocket connection established');
+        };
+    
+        socket.onclose = function(e) {
+            console.log('WebSocket connection closed');
+        };
+    
+        function sendMessage(message) {
+            socket.send(
+                JSON.stringify({
+                    message: message
+                })
+            );
+        }
+    </script>
+</body>
+</html>
