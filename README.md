@@ -1,12 +1,13 @@
 # Socket-Number-Django
 
 ## Start server Using 
-First time
-<code>docker-compose up --build</code> 
+
+<code>docker-compose up</code> 
+
 open browser type
 
-<code>localhost:8000/home<code>
+<code>http://localhost:8000/home</code>
 
-##API 
+## API 
 
 <code>ws/localhost:8000/ws/random_number</code>
